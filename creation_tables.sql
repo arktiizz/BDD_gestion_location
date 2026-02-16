@@ -57,7 +57,8 @@ CREATE TABLE Location (
     KmLoc NUMBER NOT NULL,
     Montant NUMBER NOT NULL,
 
-    CONSTRAINT check_DateRetour CHECK (DateRetour > DateDepart)
+    CONSTRAINT check_DateRetour CHECK (DateRetour > DateDepart),
+    CONSTRAINT check_DateDepart CHECK (DateDepart > TRUNC(SYSDATE))
 );
 
 commit;
