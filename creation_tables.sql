@@ -26,7 +26,9 @@ CREATE TABLE Vehicule (
     Km NUMBER NOT NULL,
     Situation VARCHAR2(100) NOT NULL,
     NbJoursLoc NUMBER DEFAULT 0 NOT NULL,
-    CAV NUMBER DEFAULT 0 NOT NULL
+    CAV NUMBER DEFAULT 0 NOT NULL,
+    
+    CONSTRAINT checkKmPositif CHECK (Km >= 0)
 );
 
 CREATE TABLE VehiculeRetraite (
