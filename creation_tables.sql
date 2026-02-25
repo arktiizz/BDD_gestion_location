@@ -26,12 +26,12 @@ CREATE TABLE Vehicule (
     NumVeh NUMBER PRIMARY KEY,
     Modele VARCHAR2(100) NOT NULL REFERENCES Modeles(Modele),
     Km NUMBER NOT NULL,
-    Situation VARCHAR2(100) DEFAULT 'Disponible' NOT NULL,
+    Situation VARCHAR2(100) DEFAULT 'disponible' NOT NULL,
     NbJoursLoc NUMBER DEFAULT 0 NOT NULL,
     CAV NUMBER DEFAULT 0 NOT NULL,
     
     CONSTRAINT checkKmPositif CHECK (Km >= 0),
-    CONSTRAINT checkSituation CHECK (Situation IN ('Location', 'Disponible', 'Retraite'))
+    CONSTRAINT checkSituation CHECK (Situation IN ('location', 'disponible', 'retraite'))
 
 );
 
@@ -49,9 +49,9 @@ CREATE TABLE Formules (
 );
 
 CREATE TABLE Tarifs (
-    NumCat NUMBER REFERENCES Categories(NumCat),
-    Formule VARCHAR2(100) REFERENCES Formules(Formule),
-    Tarif NUMBER NOT NULL
+    NumCat NUMBER,
+    Formule VARCHAR2(100),
+    Tarif NUMBER NOT NULL,
 
     CONSTRAINT pk_tarifs PRIMARY KEY (NumCat, Formule),
 
@@ -62,7 +62,7 @@ CREATE TABLE Tarifs (
 );
 
 CREATE TABLE Location (
-    NumLoc NUMBER PRIMARY KEY,
+    NumLoc VARCHAR2(50) PRIMARY KEY,
     NumVeh NUMBER REFERENCES Vehicule(NumVeh),
     Formule VARCHAR2(100) REFERENCES Formules(Formule),
     DateDepart DATE NOT NULL,
