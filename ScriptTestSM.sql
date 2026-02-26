@@ -10,7 +10,7 @@ INSERT INTO Categories(NumCat, Categorie, PrixKm) VALUES(8,'Utilitaire-14m3',0);
 INSERT INTO Categories(NumCat, Categorie, PrixKm) VALUES(9,'SUV',0.5);
 
 -- Données de la table Modeles
-INSERT INTO Modeles(Modele, Marque, NumCat) VALUES('Captur','Renault',0); --dans Categories numcat 0 existe pas ?
+INSERT INTO Modeles(Modele, Marque, NumCat) VALUES('Captur','Renault',0);
 INSERT INTO Modeles(Modele, Marque, NumCat) VALUES('Clio','Renault',1);
 INSERT INTO Modeles(Modele, Marque, NumCat) VALUES('208','Peugeot',1);
 INSERT INTO Modeles(Modele, Marque, NumCat) VALUES('C3','Citroen',1);
@@ -29,19 +29,19 @@ INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(5,'Scenic',1000);
 INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(6,'3008',1000);
 INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(7,'Jumpy',1000);
 INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(8,'Master',1000);
-INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(9,'C5',1000); --dans Modeles, modele 'C5' existe pas ?
+INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(9,'C5',1000);
 INSERT INTO Vehicule(NumVeh, Modele, Km) VALUES(10,'508',50001);
 
 -- Données de la table Formules
 INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('jour',1,100);
-INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('jour',0,1000); --violation contrainte unique, 2x 'jour' ?
+INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('jour',0,1000);
 INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('fin-semaine',2,200);
-INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('fin-semaine',1,0); --violation contrainte unique aussi
+INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('fin-semaine',1,0);
 INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('semaine',7,500);
 INSERT INTO Formules(Formule, NbJours, ForfaitKm) VALUES('mois',30,1000);
 
 -- Données de la table Tarifs
-INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(0,'jour',29); --dans Categories, numcat 0 existe pas
+INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(0,'jour',29);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(1,'jour',39);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(1,'fin-semaine',69);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(1,'semaine',199);
@@ -69,6 +69,6 @@ INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(6,'mois',899);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'jour',79);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'mois',0);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'fin-semaine',159);
-INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'vacances',159); --Formule 'vacances existe pas
+INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'vacances',159);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'semaine',359);
 INSERT INTO Tarifs(NumCat, Formule, Tarif) VALUES(7,'mois',1199);
