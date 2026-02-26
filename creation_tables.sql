@@ -67,7 +67,7 @@ CREATE TABLE Location (
     Formule VARCHAR2(100) REFERENCES Formules(Formule),
     DateDepart DATE NOT NULL,
     DateRetour DATE NOT NULL,
-    KmLoc NUMBER NOT NULL,
+    KmLoc NUMBER DEFAULT 0 NOT NULL,
     Montant NUMBER NOT NULL,
 
     CONSTRAINT check_DateRetour CHECK (DateRetour > DateDepart)
