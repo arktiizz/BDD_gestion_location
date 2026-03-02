@@ -35,8 +35,8 @@ BEGIN
     AND t.NumCat = m.NumCat
     AND v.NumVeh = :n.NumVeh;
 
-    :NEW.DateRetour := :NEW.DateDepart + v_nb_jours;
-    :NEW.Montant := v_tarif;
+    :n.DateRetour := :n.DateDepart + nbJoursFormule;
+    :n.Montant := tarifTarif;
 
     UPDATE Vehicule
     SET Situation = 'location'
