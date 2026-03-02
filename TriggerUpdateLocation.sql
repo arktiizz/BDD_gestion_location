@@ -1,20 +1,20 @@
 CREATE OR REPLACE TRIGGER triggerUpdateLocation
 BEFORE UPDATE OF DateRetour, KmLoc ON Location
-REFERENCING NEW AS n AND OLD AS o
+REFERENCING NEW AS n OLD AS o
 FOR EACH ROW
 DECLARE
     ForfaitKmActuel NUMBER;
     PrixKmActuel NUMBER;
     KmActuel NUMBER;
-    montantDepassement NUMBER;
-    dureeLocation NUMBER
+    MontantDepassement NUMBER;
+    DureeLocation NUMBER
 BEGIN
     IF :n.KmLoc <= 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, "Le kilométrage doit être supérieur ou égal à 0"); --car on peut louer un véhicule sans l'utiliser ?
+        RAISE_APPLICATION_ERROR(-20001, 'Le kilométrage doit être supérieur ou égal à 0'); --car on peut louer un véhicule sans l'utiliser ?
     END IF;
 
-    IF :n.DateRetour < :o.DateRetour THEN
-        DBMS_OUTPUT.PUT_LINE("Attention : la date de retour a été dépassée pour le véhicule " || n.NumVeh);
+    IF :n.DateRetour > :o.DateRetour THEN
+        DBMS_OUTPUT.PUT_LINE('Attention : la date de retour a été dépassée pour le véhicule ' || n.NumVeh);
     END IF;
 
     SELECT f.ForfaitKm
@@ -29,8 +29,8 @@ BEGIN
     JOIN Vehicule v ON v.Modele = m.Modele
     WHERE v.NumVeh = :o.NumVeh;
 
-    IF (:n.KmLoc - v_ForfaitKm) > 0 THEN
-        montantDepassement := (:n.KmLoc - v_ForfaitKm) * v_PrixKm;
+    IF (:n.KmLoc - ForfaitKm) > 0 THEN
+        montantDepassement := (:n.KmLoc - ForfaitKm) * PrixKm;
     ELSE
         montantDepassement := 0;
     END IF;
@@ -40,8 +40,9 @@ BEGIN
 
     IF KmActuel + :n.KmLoc > 50000 THEN
         UPDATE Vehicule
-        SET Km = v_KmActuel + :n.KmLoc,
-            NbJoursLoc = NbJoursLoc + v_DureeLocation,
+        SET Situation = 'retraite',
+            Km = KmActuel + :n.KmLoc,
+            NbJoursLoc = NbJoursLoc + DureeLocation,
             CAV = CAV + :n.Montant
         WHERE NumVeh = :n.NumVeh;
 
@@ -53,7 +54,7 @@ BEGIN
     ELSE
         UPDATE Vehicule
         SET Situation = 'disponible',
-            Km = v_KmActuel + :n.KmLoc,
+            Km = KmActuel + :n.KmLoc,
             NbJoursLoc = NbJoursLoc + DureeLocation,
             CAV = CAV + :n.Montant
         WHERE NumVeh = :n.NumVeh;
