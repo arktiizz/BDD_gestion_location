@@ -10,7 +10,7 @@ DECLARE
     DureeLocation NUMBER;
 BEGIN
     IF :n.KmLoc <= 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Le kilométrage doit être supérieur ou égal à 0'); --car on peut louer un véhicule sans l'utiliser ?
+        RAISE_APPLICATION_ERROR(-20001, 'Le kilométrage doit être supérieur ou égal à 0'); --car on peut louer un véhicule sans l'utiliser 
     END IF;
 
     IF :n.DateRetour > :o.DateRetour THEN
@@ -47,7 +47,7 @@ BEGIN
         WHERE NumVeh = :n.NumVeh;
 
         INSERT INTO VehiculeRetraite(NumVeh, DateRetraite)
-        VALUES(:n.NumVeh, TRUNC(SYSDATE));
+        VALUES(:n.NumVeh, :n.DateRetour);
 
         DBMS_OUTPUT.PUT_LINE('Le véhicule ' || :n.NumVeh || ' a pris sa retraite');
 
