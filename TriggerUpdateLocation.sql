@@ -7,18 +7,18 @@ DECLARE
     PrixKmActuel NUMBER;
     KmActuel NUMBER;
     MontantDepassement NUMBER;
-    DureeLocation NUMBER
+    DureeLocation NUMBER;
 BEGIN
     IF :n.KmLoc <= 0 THEN
         RAISE_APPLICATION_ERROR(-20001, 'Le kilométrage doit être supérieur ou égal à 0'); --car on peut louer un véhicule sans l'utiliser ?
     END IF;
 
     IF :n.DateRetour > :o.DateRetour THEN
-        DBMS_OUTPUT.PUT_LINE('Attention : la date de retour a été dépassée pour le véhicule ' || n.NumVeh);
+        DBMS_OUTPUT.PUT_LINE('Attention : la date de retour a été dépassée pour le véhicule ' || :n.NumVeh);
     END IF;
 
     SELECT f.ForfaitKm
-    INTO FormuleKmActuel
+    INTO ForfaitKmActuel
     FROM Formules f
     WHERE f.Formule = :o.Formule;
 
@@ -29,8 +29,8 @@ BEGIN
     JOIN Vehicule v ON v.Modele = m.Modele
     WHERE v.NumVeh = :o.NumVeh;
 
-    IF (:n.KmLoc - ForfaitKm) > 0 THEN
-        montantDepassement := (:n.KmLoc - ForfaitKm) * PrixKm;
+    IF (:n.KmLoc - ForfaitKmActuel) > 0 THEN
+        montantDepassement := (:n.KmLoc - ForfaitKmActuel) * PrixKmActuel;
     ELSE
         montantDepassement := 0;
     END IF;
