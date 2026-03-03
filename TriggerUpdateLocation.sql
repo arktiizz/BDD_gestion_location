@@ -9,9 +9,11 @@ DECLARE
     MontantDepassement NUMBER;
     DureeLocation NUMBER;
 BEGIN
-    IF :n.KmLoc <= 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Le kilométrage doit être supérieur ou égal à 0'); --car on peut louer un véhicule sans l'utiliser 
-    END IF;
+    IF :o.KmLoc != 0 THEN
+        RAISE_APPLICATION_ERROR(-20067, 'Cette location est terminé, impossible de le modifier.');
+
+    IF :n.KmLoc < 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Le kilométrage doit être supérieur ou égal à 0');
 
     IF :n.DateRetour > :o.DateRetour THEN
         DBMS_OUTPUT.PUT_LINE('Attention : la date de retour a été dépassée pour le véhicule ' || :n.NumVeh);
