@@ -31,7 +31,6 @@ CREATE TABLE Vehicule (
     CAV NUMBER DEFAULT 0 NOT NULL,
     
     CONSTRAINT checkKmPositif CHECK (Km >= 0),
-    CONSTRAINT checkKmLimite CHECK (Km <= 50000),
     CONSTRAINT checkSituation CHECK (Situation IN ('location', 'disponible', 'retraite'))
 
 );
